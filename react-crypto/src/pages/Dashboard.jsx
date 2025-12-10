@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { DASHBOARD_MODES, getDashboardMode } from "../utils/dashboardMode";
 import { useBusinessData } from "../hooks/useBusinessData";
 import BitcoinLogo from "../assets/bitcoin.png";
@@ -38,6 +38,14 @@ const Dashboard = () => {
 } = useBusinessData();
 
 const [dashboardMode, setDashboardMode] = React.useState(getDashboardMode());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDashboardMode(getDashboardMode());
+    }, 500);
+
+    return () => clearInterval(interval);
+  }, []);
 
 
   return (
